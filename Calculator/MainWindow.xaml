@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
         KeyDown="Window_KeyDown"
-        Title="GastroCalculator" Height="561" Width="480" Background="#222">
+        Title="Calculator" Height="561" Width="480" Background="#222">
 
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -30,29 +30,29 @@
                    HorizontalAlignment="Right" VerticalAlignment="Bottom" 
                    Margin="0,0,10,10" />
 
-        <Button Grid.Row="1" Grid.Column="0" Content="C" Margin="2" Background="#444" Foreground="White" FontSize="20" Click="Clear_Click"/>
-        <Button Grid.Row="1" Grid.Column="1" Content="CE" Margin="2" Background="#444" Foreground="White" FontSize="20" Click="ClearEntry_Click"/>
-        <Button Grid.Row="1" Grid.Column="2" Content="&lt;" Margin="2" Background="#444" Foreground="White" FontSize="20" Click="Back_Click" />
-        <Button Grid.Row="1" Grid.Column="3" Content="÷" Margin="2" Background="#FF0075FF" Foreground="White" FontSize="25" Click="Operator_Click"/>
+        <Button Grid.Row="1" Grid.Column="0" Content="C" Margin="2" Background="#444" Foreground="White" FontSize="20" Click="Clear_Click" Focusable="False"/>
+        <Button Grid.Row="1" Grid.Column="1" Content="CE" Margin="2" Background="#444" Foreground="White" FontSize="20" Click="ClearEntry_Click" Focusable="False"/>
+        <Button Grid.Row="1" Grid.Column="2" Content="&lt;" Margin="2" Background="#444" Foreground="White" FontSize="20" Click="Back_Click" Focusable="False"/>
+        <Button Grid.Row="1" Grid.Column="3" Content="÷" Margin="2" Background="#FF0075FF" Foreground="White" FontSize="25" Click="Operator_Click" Focusable="False"/>
 
-        <Button Grid.Row="2" Grid.Column="0" Content="7" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click"/>
-        <Button Grid.Row="2" Grid.Column="1" Content="8" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click"/>
-        <Button Grid.Row="2" Grid.Column="2" Content="9" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click"/>
-        <Button Grid.Row="2" Grid.Column="3" Content="×" Margin="2" Background="#FF0075FF" Foreground="White" FontSize="25" Click="Operator_Click"/>
+        <Button Grid.Row="2" Grid.Column="0" Content="7" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click" Focusable="False"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="8" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click" Focusable="False"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="9" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click" Focusable="False"/>
+        <Button Grid.Row="2" Grid.Column="3" Content="×" Margin="2" Background="#FF0075FF" Foreground="White" FontSize="25" Click="Operator_Click" Focusable="False"/>
 
-        <Button Grid.Row="3" Grid.Column="0" Content="4" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click"/>
-        <Button Grid.Row="3" Grid.Column="1" Content="5" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click"/>
-        <Button Grid.Row="3" Grid.Column="2" Content="6" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click"/>
-        <Button Grid.Row="3" Grid.Column="3" Content="-" Margin="2" Background="#FF0075FF" Foreground="White" FontSize="25" Click="Operator_Click"/>
+        <Button Grid.Row="3" Grid.Column="0" Content="4" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click" Focusable="False"/>
+        <Button Grid.Row="3" Grid.Column="1" Content="5" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click" Focusable="False"/>
+        <Button Grid.Row="3" Grid.Column="2" Content="6" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click" Focusable="False"/>
+        <Button Grid.Row="3" Grid.Column="3" Content="-" Margin="2" Background="#FF0075FF" Foreground="White" FontSize="25" Click="Operator_Click" Focusable="False"/>
 
-        <Button Grid.Row="4" Grid.Column="0" Content="1" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click"/>
-        <Button Grid.Row="4" Grid.Column="1" Content="2" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click"/>
-        <Button Grid.Row="4" Grid.Column="3" Content="+" Margin="2" Background="#FF0075FF" Foreground="White" FontSize="25" Click="Operator_Click"/>
-        <Button Grid.Row="4" Grid.Column="2" Content="3" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click"/>
+        <Button Grid.Row="4" Grid.Column="0" Content="1" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click" Focusable="False"/>
+        <Button Grid.Row="4" Grid.Column="1" Content="2" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click" Focusable="False"/>
+        <Button Grid.Row="4" Grid.Column="3" Content="+" Margin="2" Background="#FF0075FF" Foreground="White" FontSize="25" Click="Operator_Click" Focusable="False"/>
+        <Button Grid.Row="4" Grid.Column="2" Content="3" Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click" Focusable="False"/>
 
-        <Button Grid.Row="5" Grid.Column="0" Content="0" Margin="2,2,2,2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click"/>
-        <Button Grid.Row="5" Grid.Column="1" Content="00" Margin="2,2,2,2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click"/>
-        <Button Grid.Row="5" Grid.Column="2" Content="," Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click"/>
-        <Button Grid.Row="5" Grid.Column="3" Content="=" Margin="2" Background="#FF0075FF" Foreground="White" FontSize="25" Click="Equal_Click"/>
+        <Button Grid.Row="5" Grid.Column="0" Content="0" Margin="2,2,2,2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click" Focusable="False"/>
+        <Button Grid.Row="5" Grid.Column="1" Content="00" Margin="2,2,2,2" Background="#666" Foreground="White" FontSize="22" Click="Number_Click" Focusable="False"/>
+        <Button Grid.Row="5" Grid.Column="2" Content="," Margin="2" Background="#666" Foreground="White" FontSize="22" Click="Decimal_Click" Focusable="False"/>
+        <Button Grid.Row="5" Grid.Column="3" Content="=" Margin="2" Background="#FF0075FF" Foreground="White" FontSize="25" Click="Equal_Click" Focusable="False"/>
     </Grid>
 </Window>

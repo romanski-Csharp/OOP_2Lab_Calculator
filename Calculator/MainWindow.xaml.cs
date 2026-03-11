@@ -59,7 +59,18 @@ namespace Calculator
                 Display.Text += number;
             }
         }
-
+        private void Decimal_Click(object sender, RoutedEventArgs e)
+        {
+            if (isNewEntry)
+            {
+                Display.Text = "0,";
+                isNewEntry = false;
+            }
+            else if (!Display.Text.Contains(","))
+            {
+                Display.Text += ",";
+            }
+        }
         private void Operator_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -135,6 +146,8 @@ namespace Calculator
                 SimulateOperatorClick("×");
             else if (e.Key == Key.Divide || e.Key == Key.Oem2) // Oem2 - "/"
                 SimulateOperatorClick("÷");
+            else if (e.Key == Key.Decimal || e.Key == Key.OemPeriod || e.Key == Key.OemComma)
+                Decimal_Click(null, null);
             else if (e.Key == Key.Enter || e.Key == Key.OemPlus)
                 Equal_Click(null, null);
             else if (e.Key == Key.Escape)
