@@ -91,6 +91,21 @@ namespace Calculator
             {
                 Display.Text = (number == "0" || number == "00") ? "0" : number;
             }
+            else if (Display.Text == "-")
+            {
+                Display.Text += (number == "00") ? "0" : number;
+            }
+            else if (Display.Text == "-0")
+            {
+                if (number == "0" || number == "00")
+                {
+                    return;
+                }
+                else
+                {
+                    Display.Text = "-" + number;
+                }
+            }
             else
             {
                 Display.Text += number;
@@ -98,10 +113,16 @@ namespace Calculator
         }
         private void Decimal_Click(object sender, RoutedEventArgs e)
         {
+            if (Display.Text == "Помилка") return;
+
             if (isNewEntry)
             {
                 Display.Text = "0,";
                 isNewEntry = false;
+            }
+            else if (Display.Text == "-")
+            {
+                Display.Text = "-0,";
             }
             else if (!Display.Text.Contains(","))
             {
@@ -114,6 +135,13 @@ namespace Calculator
 
             Button button = (Button)sender;
             string op = button.Content.ToString();
+
+            if (op == "-" && (Display.Text == "0" || isNewEntry))
+            {
+                Display.Text = "-";
+                isNewEntry = false;
+                return;
+            }
 
             if (!string.IsNullOrEmpty(currentOperator) && !isNewEntry)
             {
@@ -171,6 +199,8 @@ namespace Calculator
                     }
                     break;
             }
+
+            if (result == 0) result = 0;
 
             Display.Text = result.ToString();
             currentValue = result;
