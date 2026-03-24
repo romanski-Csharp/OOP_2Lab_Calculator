@@ -31,7 +31,7 @@
                    Margin="0,0,10,10" />
 
         <Button Grid.Row="1" Grid.Column="0" Content="C" Margin="2" Background="#444" Foreground="White" FontSize="20" Click="Clear_Click" Focusable="False"/>
-        <Button Grid.Row="1" Grid.Column="1" Content="CE" Margin="2" Background="#444" Foreground="White" FontSize="20" Click="ClearEntry_Click" Focusable="False"/>
+        <Button Grid.Row="1" Grid.Column="1" Content="CE" Margin="2" Background="#444" Foreground="White" FontSize="20" Command="{Binding ClearEntryCommand}" Focusable="False"/>
         <Button Grid.Row="1" Grid.Column="2" Content="&lt;" Margin="2" Background="#444" Foreground="White" FontSize="20" Click="Back_Click" Focusable="False"/>
         <Button Grid.Row="1" Grid.Column="3" Content="÷" Margin="2" Background="#FF0075FF" Foreground="White" FontSize="25" Click="Operator_Click" Focusable="False"/>
 

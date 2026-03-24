@@ -16,18 +16,41 @@ namespace Calculator
         private double currentValue = 0;
         private string currentOperator = "";
         private bool isNewEntry = true;
-
+        private string undoText = null;
+        private double undoValue = 0;
+        private string undoOperator = "";
+        public ICommand ClearEntryCommand { get; }
         public MainWindow()
         {
             InitializeComponent();
-        }
-        private void ClearEntry_Click(object sender, RoutedEventArgs e)
-        {
-            Display.Text = "0";
-            isNewEntry = true;
+
+            this.DataContext = this;
+
+            ClearEntryCommand = new RelayCommand(
+                execute => {
+                    if (undoText != null)
+                    {
+                        currentValue = undoValue;       
+                        currentOperator = undoOperator; 
+                        Display.Text = undoText;        
+
+                        isNewEntry = false; 
+
+                        undoText = null;
+                    }
+                    else
+                    {
+                        Display.Text = "0";
+                        isNewEntry = true;
+                    }
+                },
+                canExecute => true 
+            );
         }
         private void Clear_Click(object sender, RoutedEventArgs e)
         {
+            undoText = null;
+
             Display.Text = "0";
             currentValue = 0;
             currentOperator = "";
@@ -35,13 +58,27 @@ namespace Calculator
         }
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            if (Display.Text.Length > 1)
-                Display.Text = Display.Text.Remove(Display.Text.Length - 1);
-            else
+            if (Display.Text == "Помилка")
+            {
                 Display.Text = "0";
+                isNewEntry = true;
+                return;
+            }
+
+            if (Display.Text.Length > 1)
+            {
+                Display.Text = Display.Text.Remove(Display.Text.Length - 1);
+            }
+            else
+            {
+                Display.Text = "0";
+                isNewEntry = true; 
+            }
         }
         private void Number_Click(object sender, RoutedEventArgs e)
         {
+            undoText = null;
+
             Button button = (Button)sender;
             string number = button.Content.ToString();
 
@@ -73,6 +110,8 @@ namespace Calculator
         }
         private void Operator_Click(object sender, RoutedEventArgs e)
         {
+            if (Display.Text == "Помилка") return;
+
             Button button = (Button)sender;
             string op = button.Content.ToString();
 
@@ -82,7 +121,10 @@ namespace Calculator
             }
             else
             {
-                currentValue = double.Parse(Display.Text);
+                if (double.TryParse(Display.Text, out double val))
+                {
+                    currentValue = val;
+                }
             }
 
             currentOperator = op;
@@ -91,28 +133,31 @@ namespace Calculator
 
         private void Equal_Click(object sender, RoutedEventArgs e)
         {
+            if (Display.Text == "Помилка") return;
+
+            if (!string.IsNullOrEmpty(currentOperator))
+            {
+                undoValue = currentValue;       
+                undoOperator = currentOperator; 
+                undoText = Display.Text;        
+            }
+
             CalculateResult();
-            currentOperator = "";
+            currentOperator = ""; 
         }
 
         private void CalculateResult()
         {
             if (string.IsNullOrEmpty(currentOperator)) return;
 
-            double displayValue = double.Parse(Display.Text);
-            double result = 0;
+            if (!double.TryParse(Display.Text, out double displayValue)) return;
 
+            double result = 0;
             switch (currentOperator)
             {
-                case "+":
-                    result = currentValue + displayValue;
-                    break;
-                case "-":
-                    result = currentValue - displayValue;
-                    break;
-                case "×":
-                    result = currentValue * displayValue;
-                    break;
+                case "+": result = currentValue + displayValue; break;
+                case "-": result = currentValue - displayValue; break;
+                case "×": result = currentValue * displayValue; break;
                 case "÷":
                     if (displayValue != 0)
                         result = currentValue / displayValue;
@@ -120,11 +165,11 @@ namespace Calculator
                     {
                         Display.Text = "Помилка";
                         currentValue = 0;
+                        currentOperator = "";
                         isNewEntry = true;
                         return;
                     }
                     break;
-
             }
 
             Display.Text = result.ToString();
@@ -154,6 +199,10 @@ namespace Calculator
                 Clear_Click(null, null);
             else if (e.Key == Key.Back)
                 Back_Click(null, null);
+            else if (e.Key == Key.Delete && ClearEntryCommand.CanExecute(null))
+            {
+                ClearEntryCommand.Execute(null);
+            }
         }
 
         private void SimulateButtonClick(string content)
